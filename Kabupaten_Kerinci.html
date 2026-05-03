@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Geospatial Mashup</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 700px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+<script>
+    var mymap = L.map('map').setView([-2.151118, 101.490827], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(mymap);
+
+    // --- Polygon ---
+    var polygon = L.polygon([
+        [-1.7805365321514517, 101.23059518528964], // titik barat
+        [-1.770, 101.240],
+        [-1.765, 101.260],
+        [-1.7636732505957755, 101.29783528107109], // titik utara-timur
+        [-1.780, 101.300],
+        [-1.800, 101.295],
+        [-1.820, 101.280],
+        [-1.8385039206644738, 101.25914975967945], // titik selatan
+        [-1.830, 101.240],
+        [-1.810, 101.230]
+    ], {
+        color: '#006400',
+        fillColor: '#32CD32',
+        fillOpacity: 0.4
+    }).addTo(mymap);
+
+    polygon.bindPopup('<b>Perkebunan Teh Kayu Aro</b>');
+
+    // --- Marker (TN Kerinci Seblat) ---
+    var marker = L.marker([-1.6945781172401888, 101.27099317135249]).addTo(mymap);
+    marker.bindPopup('<b>Gunung Kerinci</b>');
+    var marker2 = L.marker([-2.0909965725191975, 101.46283165061449]).addTo(mymap);
+    marker2.bindPopup('<b>Bandara Depati Parbo</b>');
+    var marker3 = L.marker([-1.671996942206745, 101.41513127372839]).addTo(mymap);
+    marker3.bindPopup('<b>Gunung Tujuh</b>');
+
+    // --- Circle ---
+    var circle = L.circle([-2.1636547578151677, 101.50254504431068], {
+        color: '#0000FF',
+        fillColor: '#1E90FF',
+        fillOpacity: 0.5,
+        radius: 7000   // diperbesar (7 km)
+    }).addTo(mymap);
+
+    circle.bindPopup('<b>Danau Kerinci</b>');
+    var polyline = L.polyline([
+        [-1.718929364161027, 101.34595708572877],
+        [-1.7830770982586774, 101.27213175360663],
+        [-1.8065554522359135, 101.27171229149391],
+        [-1.8124249934708152, 101.26625928402845],
+        [-1.830452750888943, 101.26416197346481],
+        [-1.8401616510477377, 101.25925347532241],
+        [-1.89653654303343, 101.29994740669049],
+        [-1.9075576493886757, 101.29985841883168],
+        [-1.987023153962803, 101.37501872818761],
+        [-2.0280662118843162, 101.37992906457472],
+        [-2.1449439252262548, 101.44108506727727],
+        [-2.1681399820440426, 101.45358410429708]
+    ], {
+        color: '#FF0000',
+        weight: 3,
+        opacity: 0.9
+    }).addTo(mymap);
+
+    polyline.bindPopup('Jalur wilayah Kerinci');
+    </script>
+</body>
+
+</html>
